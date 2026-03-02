@@ -6,14 +6,14 @@ import AddToCartModal from './components/modals/AddToCartModal';
 import ProductService from '../../services/productService';
 import { sleep } from '../../utils/sleep';
 import { addUniqueToCart } from '../../utils/cart';
-import type { Product } from '../../types';
+import type { Product, CartItem } from '../../types';
 
 const ProductsPage = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
-    const [cart, setCart] = useState<string[]>([]);
+    const [cart, setCart] = useState<CartItem[]>([]);
     const [searchQuery, setSearchQuery] = useState<string>('');
 
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
