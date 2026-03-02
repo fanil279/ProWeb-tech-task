@@ -48,11 +48,15 @@ const ProductsPage: FC = () => {
     return (
         <main>
             <ul>
-                {products.map((product) => (
-                    <li key={product.id}>
-                        {product.title}
-                    </li>
-                ))}
+                {products.length > 0 ? (
+                    products.map((product) => (
+                        <li key={product.id}>
+                            {product.title}
+                        </li>
+                    ))
+                ) : (
+                    <p className='no-products'>No products available</p>
+                )}
             </ul>
         </main>
     );

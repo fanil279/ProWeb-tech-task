@@ -23,12 +23,17 @@
   animation: spin 0.9s ease-in-out infinite;
 }
 
+.no-products {
+  font-weight: bold;
+  font-style: italic;
+  font-size: clamp(1rem, 2vw, 2.5rem);
+}
+
 .error {
   color: red;
   font-weight: bold;
   font-style: italic;
   font-size: clamp(1rem, 2vw, 2.5rem);
-
 }
 
 @keyframes spin {

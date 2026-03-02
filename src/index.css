@@ -33,3 +33,9 @@ body {
     background-color: #f9f9f9;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+  }
+}
