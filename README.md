@@ -1,25 +1,26 @@
-To Run the project
+Чтобы запустить проект
 
-1. Clone the repository
+1. Скопируйте репозиторий
   git clone <https://github.com/fanil279/ProWeb-tech-task>
   cd "ProWeb tech task"
 
-2. Install dependencies
+2. Установите зависимости
 
-Using npm:
+Используя npm:
   npm install
 
-3. Run the development server
+3. Запустите сервер
 
-Using npm:
+Используя npm:
   npm run dev
 
-4. Open the application
+4. Откройте приложение
 
-After starting the server, open: http://localhost:5173 or the port shown in your terminal
+После запуска сервера откройте в браузере: http://localhost:5173 .
+Или используйте порт, указанный в терминале.
 
 
-Tech Stack
+Тех стек
 
   React
   TypeScript

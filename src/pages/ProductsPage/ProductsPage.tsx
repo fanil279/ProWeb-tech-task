@@ -21,12 +21,7 @@ const ProductsPage: FC = () => {
                 const data = await ProductService.getProducts(controller.signal);
                 setProducts(data);
             } catch (err) {
-                if (
-                    err instanceof Error &&
-                    err.name === 'CanceledError'
-                ) {
-                    return;
-                }
+                if (err instanceof Error && err.name === 'CanceledError') return;
 
                 setError('Failed to load products!');
                 console.error(err);
@@ -48,15 +43,11 @@ const ProductsPage: FC = () => {
     return (
         <main>
             <ul>
-                {products.length > 0 ? (
-                    products.map((product) => (
-                        <li key={product.id}>
-                            {product.title}
-                        </li>
-                    ))
-                ) : (
-                    <p className='no-products'>No products available</p>
-                )}
+                {products.map((product) => (
+                    <li key={product.id}>
+                        {product.title}
+                    </li>
+                ))}
             </ul>
         </main>
     );
