@@ -1,12 +1,12 @@
 import type { CartProps } from '../../../types';
 
-const Cart = ({ products }: CartProps) => (
+const Cart = ({ items }: CartProps) => (
     <div className='cart-container'>
         <h3>Cart</h3>
 
         <ul className='cart-list'>
-            {products.map((product) => (
-                <li key={product.id} className='cart-list-item'>{product.title}</li>
+            {items.map((title) => (
+                <li key={title} className='cart-list-item'>{title}</li>
             ))}
         </ul>
     </div>

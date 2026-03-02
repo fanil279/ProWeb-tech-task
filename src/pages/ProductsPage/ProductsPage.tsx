@@ -13,7 +13,7 @@ const ProductsPage = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
-    const [cart, setCart] = useState<Product[]>([]);
+    const [cart, setCart] = useState<string[]>([]);
     const [searchQuery, setSearchQuery] = useState<string>('');
 
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -52,10 +52,10 @@ const ProductsPage = () => {
         setIsModalOpen(true);
     };
 
-    const handleModalYes = () => {
-        if (!selectedProduct) return;
+    const handleModalYes = (title: string) => {
+        if (!title) return;
 
-        setCart((prev) => addUniqueToCart(prev, selectedProduct));
+        setCart((prev) => addUniqueToCart(prev, title));
 
         setIsModalOpen(false);
         setSelectedProduct(null);
@@ -81,12 +81,12 @@ const ProductsPage = () => {
 
     return (
         <>
-            {cart.length > 0 && <Cart products={cart} />}
+            {cart.length > 0 && <Cart items={cart} /> }
 
             {isModalOpen && selectedProduct && (
                 <AddToCartModal
-                    product={selectedProduct}
-                    onYes={handleModalYes}
+                    productTitle={selectedProduct.title}
+                    onYes={() => handleModalYes(selectedProduct.title)}
                     onNo={handleModalNo}
                 />
             )}

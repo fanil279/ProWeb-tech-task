@@ -1,12 +1,11 @@
-import type { Product } from './index';
+export type CartItem = string;
 
 export interface CartProps {
-    products: Product[];
+    items: CartItem[];
 };
 
-
 export type AddToCartModalProps = {
-  product: Product;
-  onYes: (product: Product) => void;
+  productTitle: string;
+  onYes: (title: string) => void;
   onNo: () => void;
 };

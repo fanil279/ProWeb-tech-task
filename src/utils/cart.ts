@@ -1,7 +1,7 @@
-import type { Product } from '../types';
+import type { CartItem } from '../types';
 
-export function addUniqueToCart(cart: Product[], product: Product): Product[] {
-  return cart.some((p) => p.id === product.id)
+export function addUniqueToCart(cart: CartItem[], item: CartItem): CartItem[] {
+  return cart.some((p) => p.trim() === item.trim())
     ? cart
-    : [...cart, product];
+    : [...cart, item];
 };
