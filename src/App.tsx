@@ -1,11 +1,8 @@
-import './App.css'
+import './App.css';
+import ProductsPage from './pages/ProductsPage/ProductsPage';
 
 function App() {
-  return (
-    <>
-      
-    </>
-  )
+    return <ProductsPage />;
 }
 
-export default App
+export default App;

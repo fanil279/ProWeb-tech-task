@@ -4,3 +4,35 @@
   padding: 2rem;
   text-align: center;
 }
+
+.preloader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.spinner {
+  box-sizing: border-box;
+  width: 68px;
+  height: 68px;
+  border: 5px solid rgba(37, 99, 235, 0.2);
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  will-change: transform;
+  animation: spin 0.9s ease-in-out infinite;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+  font-style: italic;
+  font-size: clamp(1rem, 2vw, 2.5rem);
+
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
