@@ -1,6 +1,4 @@
-import type { FC } from 'react';
-
-const Preloader: FC = () => (
+const Preloader = () => (
     <div className='preloader'>
         <div className='spinner' />
     </div>

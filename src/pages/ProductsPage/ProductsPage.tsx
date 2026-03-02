@@ -1,15 +1,23 @@
-import { type FC, useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Preloader from '../../components/Preloader';
+import Input from './components/Input';
+import Cart from './components/Cart';
+import AddToCartModal from './components/modals/AddToCartModal';
 import ProductService from '../../services/productService';
+import { sleep } from '../../utils/sleep';
+import { addUniqueToCart } from '../../utils/cart';
 import type { Product } from '../../types';
 
-const ProductsPage: FC = () => {
+const ProductsPage = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
-    // Демо задержка для отображения прелоадера.
-    const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+    const [cart, setCart] = useState<Product[]>([]);
+    const [searchQuery, setSearchQuery] = useState<string>('');
+
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
     useEffect(() => {
        const controller = new AbortController();
@@ -37,19 +45,73 @@ const ProductsPage: FC = () => {
         };
     }, []);
 
+    const handleInputChange = (value: string) => setSearchQuery(value);
+
+    const handleProductClick = (product: Product) => {
+        setSelectedProduct(product);
+        setIsModalOpen(true);
+    };
+
+    const handleModalYes = () => {
+        if (!selectedProduct) return;
+
+        setCart((prev) => addUniqueToCart(prev, selectedProduct));
+
+        setIsModalOpen(false);
+        setSelectedProduct(null);
+    };
+
+    const handleModalNo = () => {
+        setIsModalOpen(false);
+        setSelectedProduct(null);
+    };
+
+    const filteredProducts = useMemo(() => {
+        const q = searchQuery.trim().toLowerCase();
+
+        if (!q) return products;
+        
+        return products.filter((product) => {
+            return product.title.toLowerCase().includes(q);
+        });
+    }, [products, searchQuery]);
+
     if (loading) return <Preloader />;
     if (error) return <p className='error'>{error}</p>;
 
     return (
-        <main>
-            <ul>
-                {products.map((product) => (
-                    <li key={product.id}>
-                        {product.title}
-                    </li>
-                ))}
-            </ul>
-        </main>
+        <>
+            {cart.length > 0 && <Cart products={cart} />}
+
+            {isModalOpen && selectedProduct && (
+                <AddToCartModal
+                    product={selectedProduct}
+                    onYes={handleModalYes}
+                    onNo={handleModalNo}
+                />
+            )}
+
+            <Input value={searchQuery} onChange={handleInputChange} />
+            
+            <main>
+                <h1>ProWeb Market</h1>
+
+                <ul className='product-list'>
+                    {filteredProducts.map((product) => (
+                        <li
+                            key={product.id}
+                            onClick={() => handleProductClick(product)}
+                            className='product-list-item'
+                        >
+                            <img src={product.thumbnail} alt={product.title} className='product-image' />
+                            <h2 className='product-title'>{product.title}</h2>
+                            <p className='product-description'>{product.description}</p>
+                            <p className='product-price'>{product.price}$</p>
+                        </li>
+                    ))}
+                </ul>
+            </main>
+        </>
     );
 }
 

@@ -21,6 +21,12 @@ body {
   min-height: 100vh;
 }
 
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
