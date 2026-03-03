@@ -91,11 +91,13 @@ const ProductsPage = () => {
                 />
             )}
 
-            <Input value={searchQuery} onChange={handleInputChange} />
+            <header>
+                <Input value={searchQuery} onChange={handleInputChange} />
+                
+                <h1>ProWeb Market</h1>
+            </header>
             
             <main>
-                <h1>ProWeb Market</h1>
-
                 <ul className='product-list'>
                     {filteredProducts.map((product) => (
                         <li

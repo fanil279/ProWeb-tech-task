@@ -45,3 +45,22 @@ body {
     animation: none;
   }
 }
+
+@media (max-width: 480px) {
+  #root {
+    padding: 1rem;
+  }
+
+  .product-list {
+    transform: translateX(-2%);
+  }
+
+  .button-container {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .button-container button {
+    width: 100%;
+  }
+}

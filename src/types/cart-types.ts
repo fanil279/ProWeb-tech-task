@@ -1,4 +1,4 @@
-import type { Product } from "./index";
+import type { Product } from './index';
 
 export type CartItem = Product['title'];
 
